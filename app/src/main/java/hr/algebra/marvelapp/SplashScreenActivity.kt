@@ -9,7 +9,7 @@ import hr.algebra.marvelapp.databinding.ActivitySplashScreenBinding
 import hr.algebra.marvelapp.framework.applyAnimation
 import hr.algebra.marvelapp.framework.startActivity
 
-private const val DELAY = 3000L
+private const val DELAY = 3500L
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {

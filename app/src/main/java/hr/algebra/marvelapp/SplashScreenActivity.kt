@@ -5,11 +5,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
+import hr.algebra.marvelapp.api.MarvelWorker
 import hr.algebra.marvelapp.databinding.ActivitySplashScreenBinding
 import hr.algebra.marvelapp.framework.applyAnimation
+import hr.algebra.marvelapp.framework.callDelayed
+import hr.algebra.marvelapp.framework.getBooleanPreference
+import hr.algebra.marvelapp.framework.isOnline
 import hr.algebra.marvelapp.framework.startActivity
 
 private const val DELAY = 3500L
+
+const val DATA_IMPORTED = "hr.algebra.marvelapp.data_imported"
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
@@ -29,9 +38,23 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun redirect() {
-        Handler(Looper.getMainLooper()).postDelayed(
-            { startActivity<HostActivity>() },
-            DELAY
-        )
+        if (getBooleanPreference(DATA_IMPORTED)) {
+            callDelayed(DELAY) { startActivity<HostActivity>() }
+        }
+        else {
+            if (isOnline()) {
+                WorkManager.getInstance(this).apply {
+                    enqueueUniqueWork(
+                        DATA_IMPORTED,
+                        ExistingWorkPolicy.KEEP,
+                        OneTimeWorkRequest.Companion.from(MarvelWorker::class.java)
+                    )
+                }
+            }
+            else {
+                binding.tvSplash.text = getString(R.string.no_internet)
+                callDelayed(DELAY) { finish() }
+            }
+        }
     }
 }

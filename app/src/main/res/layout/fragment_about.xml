@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_20dp"
+    android:orientation="vertical"
+    tools:context=".fragment.AboutFragment">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:src="@drawable/marvel_about" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="center|top"
+        android:textSize="@dimen/_50sp"
+        android:text="@string/app_made_by_matej_galic" />
+
+</LinearLayout>

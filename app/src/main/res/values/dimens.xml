@@ -3,4 +3,8 @@
     <dimen name="_400dp">400dp</dimen>
     <dimen name="_50dp">50dp</dimen>
     <dimen name="_50sp">50sp</dimen>
+    <dimen name="_20dp">20dp</dimen>
+    <dimen name="_0dp">0dp</dimen>
+    <dimen name="_150dp">150dp</dimen>
+    <dimen name="_100dp">100dp</dimen>
 </resources>

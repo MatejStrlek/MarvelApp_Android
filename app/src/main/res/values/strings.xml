@@ -6,4 +6,6 @@
     <string name="app_made_by_matej_galic">App made by: Matej Galic</string>
     <string name="items">Items</string>
     <string name="about">About</string>
+    <string name="exit">Exit</string>
+    <string name="really_exit">Really exit?</string>
 </resources>

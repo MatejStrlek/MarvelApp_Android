@@ -1,7 +1,9 @@
 package hr.algebra.marvelapp
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.navigation.Navigation
@@ -34,10 +36,29 @@ class HostActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(binding.navView, navController)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.host_menu, menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
                 toggleDrawer()
+                return true
+            }
+            R.id.miExit -> {
+                AlertDialog.Builder(this).apply {
+                    setTitle(R.string.exit)
+                    setMessage(getString(R.string.really_exit))
+                    setCancelable(true)
+                    setIcon(R.drawable.exit)
+                    setPositiveButton("OK") { _, _ ->
+                        finish()
+                    }
+                    setNegativeButton("Cancel", null)
+                    show()
+                }
                 return true
             }
         }

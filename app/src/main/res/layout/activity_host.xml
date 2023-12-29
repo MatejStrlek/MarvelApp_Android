@@ -17,11 +17,11 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navView"
-        app:menu="@menu/navigation_menu"
+        android:layout_width="@dimen/_162dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
         app:headerLayout="@layout/navigation_header"
         app:itemTextColor="@drawable/navigation_text_color"
-        android:layout_gravity="start"
-        android:layout_width="162dp"
-        android:layout_height="240dp" />
+        app:menu="@menu/navigation_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

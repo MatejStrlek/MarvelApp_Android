@@ -8,4 +8,6 @@
     <string name="about">About</string>
     <string name="exit">Exit</string>
     <string name="really_exit">Really exit?</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
 </resources>

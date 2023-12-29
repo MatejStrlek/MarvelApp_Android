@@ -53,10 +53,10 @@ class HostActivity : AppCompatActivity() {
                     setMessage(getString(R.string.really_exit))
                     setCancelable(true)
                     setIcon(R.drawable.exit)
-                    setPositiveButton("OK") { _, _ ->
+                    setPositiveButton(getString(R.string.ok)) { _, _ ->
                         finish()
                     }
-                    setNegativeButton("Cancel", null)
+                    setNegativeButton(getString(R.string.cancel), null)
                     show()
                 }
                 return true

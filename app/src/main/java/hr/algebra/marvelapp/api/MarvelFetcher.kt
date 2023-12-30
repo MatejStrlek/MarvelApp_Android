@@ -5,6 +5,10 @@ import android.util.Log
 import hr.algebra.marvelapp.MarvelReceiver
 import hr.algebra.marvelapp.api.model.Character
 import hr.algebra.marvelapp.framework.sendBroadcast
+import hr.algebra.marvelapp.handler.downloadImageAndStore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -13,7 +17,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MarvelFetcher(private val context: Context) {
 
-    private val marvelCharactersApi : MarvelCharactersApi
+    private val marvelCharactersApi: MarvelCharactersApi
+
     init {
         val retrofit = Retrofit.Builder()
             .baseUrl(API_URL)
@@ -48,25 +53,26 @@ class MarvelFetcher(private val context: Context) {
     }
 
     private fun populateItems(marvelCharacters: List<MarvelCharacter>) {
-
         val items = mutableListOf<Character>()
+        val scope = CoroutineScope(Dispatchers.IO)
 
-        marvelCharacters.forEach {
-            val imagePath = null
-            items.add(Character(
-                null,
-                it.name,
-                imagePath ?: "",
-                it.comics.available,
-                it.stories.available,
-                it.events.available,
-                it.series.available
-            )
-            )
+        scope.launch {
+            marvelCharacters.forEach {
+                val imagePath = downloadImageAndStore(context, it.thumbnail.path, it.thumbnail.extension)
+                items.add(
+                    Character(
+                        null,
+                        it.name,
+                        imagePath ?: "",
+                        it.comics.available,
+                        it.stories.available,
+                        it.events.available,
+                        it.series.available
+                    )
+                )
+            }
+            println(items)
+            context.sendBroadcast<MarvelReceiver>()
         }
-
-        println(items)
-
-        context.sendBroadcast<MarvelReceiver>()
     }
 }

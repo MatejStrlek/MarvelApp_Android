@@ -4,8 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Thumbnail(val path: String, val extension: String)
-@Serializable
-data class ResourceList(val available: Int)
 data class Comics(
     val available: Int,
     val collectionURI: String,

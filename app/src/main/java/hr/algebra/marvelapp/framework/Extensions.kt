@@ -12,6 +12,8 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.core.content.getSystemService
 import androidx.preference.PreferenceManager
+import java.math.BigInteger
+import java.security.MessageDigest
 
 fun View.applyAnimation(animationId: Int) =
     startAnimation(AnimationUtils.loadAnimation(context, animationId))
@@ -55,3 +57,7 @@ fun Context.isOnline() : Boolean {
 
     return false
 }
+
+fun String.md5(): String =
+    BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray()))
+        .toString(16).padStart(32, '0')

@@ -9,7 +9,7 @@ class MarvelWorker(
     workerParams: WorkerParameters
     ) : Worker(context,  workerParams) {
     override fun doWork(): Result {
-        MarvelFetcher(context).fetchItems(10)
+        MarvelFetcher(context).fetchItems()
         return Result.success()
     }
 }

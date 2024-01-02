@@ -8,7 +8,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 const val API_URL = "http://gateway.marvel.com/v1/public/"
-//const val HASH = "8cf4a00fb5125079a90b0d28af40935f"
 
 interface MarvelCharactersApi {
     companion object {

@@ -4,7 +4,6 @@ import hr.algebra.marvelapp.BuildConfig
 import hr.algebra.marvelapp.framework.md5
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 const val API_URL = "http://gateway.marvel.com/v1/public/"
@@ -21,10 +20,7 @@ interface MarvelCharactersApi {
         @Query("ts") ts: String = "1",
         @Query("apikey") apiKey: String = PUBLIC_KEY,
         @Query("hash") hash: String = "${Companion.ts}$PRIVATE_KEY$PUBLIC_KEY".md5(),
-        @Query("limit") limit: Int = 20) : Call<CharacterResponse>
-
-    @GET("characters/{characterId}")
-    suspend fun getSuperheroDetails(@Path("characterId") characterId: Long) : Call<CharacterResponse>
+        @Query("limit") limit: Int = 50) : Call<CharacterResponse>
 }
 
 data class CharacterResponse(

@@ -12,6 +12,8 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.core.content.getSystemService
 import androidx.preference.PreferenceManager
+import hr.algebra.marvelapp.MARVEL_PROVIDER_CONTENT_URI
+import hr.algebra.marvelapp.api.model.Character
 import java.math.BigInteger
 import java.security.MessageDigest
 
@@ -61,3 +63,27 @@ fun Context.isOnline() : Boolean {
 fun String.md5(): String =
     BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray()))
         .toString(16).padStart(32, '0')
+
+fun Context.fetchCharacters(): MutableList<Character> {
+    val characters = mutableListOf<Character>()
+
+    val cursor = contentResolver.query(
+        MARVEL_PROVIDER_CONTENT_URI, null, null, null, null
+    )
+
+    while (cursor != null && cursor.moveToNext()) {
+        characters.add(
+            Character(
+                cursor.getLong(cursor.getColumnIndexOrThrow(Character::_id.name)),
+                cursor.getString(cursor.getColumnIndexOrThrow(Character::name.name)),
+                cursor.getString(cursor.getColumnIndexOrThrow(Character::imagePath.name)),
+                cursor.getInt(cursor.getColumnIndexOrThrow(Character::comics.name)),
+                cursor.getInt(cursor.getColumnIndexOrThrow(Character::stories.name)),
+                cursor.getInt(cursor.getColumnIndexOrThrow(Character::events.name)),
+                cursor.getInt(cursor.getColumnIndexOrThrow(Character::series.name))
+            )
+        )
+    }
+
+    return characters
+}

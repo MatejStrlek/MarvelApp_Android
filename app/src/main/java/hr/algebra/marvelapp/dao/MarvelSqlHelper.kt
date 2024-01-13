@@ -63,7 +63,7 @@ class MarvelSqlHelper(context: Context?) : SQLiteOpenHelper(
     override fun update(
         values: ContentValues?, selection: String?,
         selectionArgs: Array<String>?
-    ): Int = writableDatabase.update(
+    ) = writableDatabase.update(
         TABLE_NAME,
         values,
         selection,

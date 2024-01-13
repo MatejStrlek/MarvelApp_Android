@@ -32,7 +32,7 @@ class MarvelContentProvider : ContentProvider() {
             ITEMS -> return repository.delete(selection, selectionArgs)
             ITEM_ID -> {
                 uri.lastPathSegment?.let { id ->
-                    repository.delete("${Character::_id.name}=?", arrayOf(id))
+                    return repository.delete("${Character::_id.name}=?", arrayOf(id))
                 }
             }
         }

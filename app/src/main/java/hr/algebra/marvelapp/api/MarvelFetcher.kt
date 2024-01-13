@@ -1,7 +1,9 @@
 package hr.algebra.marvelapp.api
 
+import android.content.ContentValues
 import android.content.Context
 import android.util.Log
+import hr.algebra.marvelapp.MARVEL_PROVIDER_CONTENT_URI
 import hr.algebra.marvelapp.MarvelReceiver
 import hr.algebra.marvelapp.api.model.Character
 import hr.algebra.marvelapp.framework.sendBroadcast
@@ -53,25 +55,28 @@ class MarvelFetcher(private val context: Context) {
     }
 
     private fun populateItems(marvelCharacters: List<MarvelCharacter>) {
-        val items = mutableListOf<Character>()
+
         val scope = CoroutineScope(Dispatchers.IO)
 
         scope.launch {
             marvelCharacters.forEach {
                 val imagePath = downloadImageAndStore(context, it.thumbnail.path, it.thumbnail.extension)
-                items.add(
-                    Character(
-                        null,
-                        it.name,
-                        imagePath ?: "",
-                        it.comics.available,
-                        it.stories.available,
-                        it.events.available,
-                        it.series.available
-                    )
+
+                val values = ContentValues().apply {
+                    put(Character::name.name, it.name)
+                    put(Character::imagePath.name, imagePath ?: "")
+                    put(Character::comics.name, it.comics.available)
+                    put(Character::stories.name, it.stories.available)
+                    put(Character::events.name, it.events.available)
+                    put(Character::series.name, it.series.available)
+                }
+
+                context.contentResolver.insert(
+                    MARVEL_PROVIDER_CONTENT_URI,
+                    values
                 )
             }
-            println(items)
+
             context.sendBroadcast<MarvelReceiver>()
         }
     }

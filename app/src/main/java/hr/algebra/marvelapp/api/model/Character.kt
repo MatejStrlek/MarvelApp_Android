@@ -1,7 +1,7 @@
 package hr.algebra.marvelapp.api.model
 
 data class Character(
-    val id: Long?,
+    val _id: Long?,
     val name: String,
     val imagePath: String,
     val comics: Int,

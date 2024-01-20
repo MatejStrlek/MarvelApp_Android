@@ -16,11 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MarvelApp"
         tools:targetApi="31">
+        <activity
+            android:name=".CharacterPagerActivity"
+            android:exported="false" />
+
         <provider
             android:name=".MarvelContentProvider"
             android:authorities="hr.algebra.marvelapp.api.provider"
             android:enabled="true"
-            android:exported="false"></provider>
+            android:exported="false" />
 
         <receiver
             android:name=".MarvelReceiver"

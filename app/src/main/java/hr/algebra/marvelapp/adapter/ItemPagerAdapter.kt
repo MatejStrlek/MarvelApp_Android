@@ -1,6 +1,5 @@
 package hr.algebra.marvelapp.adapter
 
-import android.content.ContentUris
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -9,25 +8,31 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import hr.algebra.marvelapp.CharacterPagerActivity
-import hr.algebra.marvelapp.MARVEL_PROVIDER_CONTENT_URI
-import hr.algebra.marvelapp.POSITION
 import hr.algebra.marvelapp.R
 import hr.algebra.marvelapp.api.model.Character
-import hr.algebra.marvelapp.framework.startActivity
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 import java.io.File
 
-class ItemAdapter (
+class ItemPagerAdapter (
     private val context: Context,
     private val items: MutableList<Character>
-) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ItemPagerAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val ivItem = itemView.findViewById<ImageView>(R.id.ivItem)
+        private val ivItem = itemView.findViewById<ImageView>(R.id.ivImage)
+
         private val tvName = itemView.findViewById<TextView>(R.id.tvName)
+        private val tvNumComics = itemView.findViewById<TextView>(R.id.tvNumComics)
+        private val tvNumStories = itemView.findViewById<TextView>(R.id.tvNumStories)
+        private val tvNumEvents = itemView.findViewById<TextView>(R.id.tvNumEvents)
+        private val tvNumSeries = itemView.findViewById<TextView>(R.id.tvNumSeries)
 
         fun bind(character: Character) {
             tvName.text = character.name
+            tvNumComics.text = character.comics.toString()
+            tvNumStories.text = character.stories.toString()
+            tvNumEvents.text = character.events.toString()
+            tvNumSeries.text = character.series.toString()
+
             Picasso.get()
                 .load(File(character.imagePath))
                 .error(R.drawable.marvel)
@@ -38,7 +43,7 @@ class ItemAdapter (
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.item, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.item_pager, parent, false)
         )
     }
 
@@ -46,25 +51,6 @@ class ItemAdapter (
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-
-        holder.itemView.setOnLongClickListener {
-            context.contentResolver.delete(
-                ContentUris.withAppendedId(MARVEL_PROVIDER_CONTENT_URI, item._id!!),
-                null,
-                null
-            )
-
-            File(item.imagePath).delete()
-            items.removeAt(position)
-            notifyDataSetChanged()
-
-            true
-        }
-
-        holder.itemView.setOnClickListener {
-            context.startActivity<CharacterPagerActivity>(POSITION, position)
-        }
-
         holder.bind(item)
     }
 }

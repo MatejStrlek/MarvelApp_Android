@@ -9,4 +9,10 @@
     <string name="really_exit">Really exit?</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
+    <string name="name">Name</string>
+    <string name="number_of_comics">Number of Comics</string>
+    <string name="_1234">1234</string>
+    <string name="number_of_stories">Number of Stories</string>
+    <string name="number_of_events">Number of Events</string>
+    <string name="number_of_series">Number of Series</string>
 </resources>

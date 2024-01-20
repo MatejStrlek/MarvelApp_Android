@@ -7,7 +7,7 @@ Welcome to the Marvel Android App! In order to run the app successfully, you'll 
 Clone the repository to your local machine:
 
 ```
-git clone https://github.com/your-username/marvel-android-app.git
+git clone https://github.com/MatejStrlek/MarvelApp_Android.git
 cd marvel-android-app
 ```
 

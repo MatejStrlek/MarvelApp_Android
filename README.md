@@ -28,7 +28,7 @@ marvel.publicKey="your_marvel_public_key"
 marvel.privateKey="your_marvel_private_key"
 ```
 
-Replace your_marvel_public_key and your_marvel_private_key with the keys obtained from the Marvel Developer Portal.
+Replace "your_marvel_public_key" and "your_marvel_private_key" with the keys obtained from the Marvel Developer Portal.
 
 ### Step 4: Build and Run the App
 

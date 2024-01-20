@@ -8,7 +8,7 @@ Clone the repository to your local machine:
 
 ```
 git clone https://github.com/MatejStrlek/MarvelApp_Android.git
-cd marvel-android-app
+cd MarvelApp_Android
 ```
 
 ### Step 2: Obtain Marvel API Keys

@@ -19,8 +19,15 @@
         android:layout_height="@dimen/_0dp"
         android:layout_weight="1"
         android:layout_gravity="center"
-        android:gravity="center|top"
+        android:gravity="center"
         android:textSize="@dimen/_50sp"
         android:text="@string/app_made_by_matej_galic" />
+
+    <TextView
+        android:text="Student on Algebra University"
+        android:textSize="@dimen/_24sp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
